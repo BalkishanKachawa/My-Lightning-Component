@@ -1,9 +1,0 @@
-<apex:page controller="ContactController">
-    <apex:form >
-        <apex:pageBlock >
-            <apex:outputField value="{!cont.Name}"/>
-            <apex:outputField value="{!cont.Phone}"/>
-            <apex:outputField value="{!cont.Email}"/>
-        </apex:pageBlock>
-    </apex:form>
-</apex:page>
