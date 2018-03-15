@@ -1,3 +1,0 @@
-<aura:event type="APPLICATION" description="Application Event" >
-	<aura:attribute name="tickerSymbol" type="String"/>    
-</aura:event>

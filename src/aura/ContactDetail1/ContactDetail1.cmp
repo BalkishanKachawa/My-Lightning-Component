@@ -1,4 +1,0 @@
-<aura:component >
-    <!--<ltng:require scripts="/resource/jquery1" afterScriptsLoaded="{!c.checkMethod}"></ltng:require>-->
-    <aura:handler name="init" value="{!this}" action="{!c.checkMethod}" />
-</aura:component>

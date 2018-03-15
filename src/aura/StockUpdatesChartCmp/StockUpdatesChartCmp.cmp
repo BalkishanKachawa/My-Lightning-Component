@@ -1,7 +1,0 @@
-<aura:component >
-    <aura:registerEvent name="regCmpEvent" type="c:StockUpdatesCmpEvent"/>
-    <aura:attribute name="TickerSymbol" type="String" />
-    <ui:button label="View Summary" press="{!c.setSymbolCmpEvent}"/>
-    <br/>
-    <div class="tb"></div>
-</aura:component>
