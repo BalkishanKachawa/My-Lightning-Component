@@ -1,0 +1,29 @@
+<aura:component controller="StockUpdatesController">
+    <!-- Attribute for Company Symbol Ticker -->
+    <aura:attribute name="symbol" type="String" />
+    
+    <aura:registerEvent name="appEvent" type="c:StockUpdatesAppEvent"/>
+    
+    <!--User Input Form-->
+	<form>
+        <div class="uiInput uiInputTextuiInput--default uiInput--input">  
+            <ui:inputText aura:id="ticker" class="field" value="" placeholder="Enter Ticker Symbol" />
+            <ui:button class="btn" label="Search" press="{!c.getTicker}"/> 
+        </div>
+	</form>    
+    <!--End User Input Form-->
+    
+    <!-- To Show Error OR Success Message-->
+    <div aura:id="msgSuccess" class="hide">
+        <ui:message severity="confirm" closable="true" title="Success">
+            <ui:outputText value="{!'Your Ticker is : '+v.symbol}"/>
+        </ui:message>
+    </div>
+    
+    <div aura:id="msgErr" class="hide">
+        <ui:message title="Error" severity="error" closable="true" >
+            <ui:outputText value="{!v.symbol +': Please enter valid Ticker'}"/>
+        </ui:message>
+    </div>
+    
+</aura:component>

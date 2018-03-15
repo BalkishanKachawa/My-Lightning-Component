@@ -1,0 +1,61 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global" >
+    <aura:attribute name="record" type="object"/>
+    <aura:attribute name="simpleRecord" type="object"/>
+    <aura:attribute name="errorRecord" type="String"/>
+    <aura:attribute name="showFields" type="Boolean" default="false"/>
+	<aura:attribute name="recordId" type="String"/>   
+    <aura:attribute name="optionValue" type="List" default="Unmarried,Married"/>
+    <force:recordData aura:id="forceRecord"
+                      targetRecord="{!v.record}"
+                      targetFields="{!v.simpleRecord}"
+                      targetError="{!v.errorRecord}"
+                      layoutType="COMPACT"
+                      mode="EDIT" /> <!-- COMPACT -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h1 class="slds-text-heading_large">New Contact</h1>
+            </header>
+            <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1">
+                <div calss="slds-grid slds-wrap">
+                    <h1 class="slds-size_2-of-2 slds-float_left slds-text-heading_medium">Basic Information</h1>
+                    <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="firstname" label="First Name" value="{!v.simpleRecord.FirstName}" placeholder="First Name"/>    
+                    <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="lastname" label="Last Name" value="{!v.simpleRecord.LastName}" placeholder="Last Name" required="true"/>
+                    <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="text" label="Phone" value="{!v.simpleRecord.Phone}" placeholder="Phone" maxlength="10" pattern="[7-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"/>
+                    <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="email" label="Email" value="{!v.simpleRecord.Email}" placeholder="Email"/>
+                    <lightning:input class="slds-size_2-of-2 slds-float_left slds-p-around_x-small" aura:id="checkbox" type="checkbox" label="Additional information" name="additionalInformation" value="{!v.showFields}" onchange="{!c.onChange}" />
+                    <aura:if isTrue="{!v.showFields}">
+                        <h1 class="slds-size_2-of-2 slds-text-heading_medium slds-m-top_small">Additional information</h1>
+                        <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="date" label="Birthdate" value="{!v.simpleRecord.Birthdate}" placeholder="Birthdate"/>
+                        <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" type="text" label="Address" value="{!v.simpleRecord.Address__c}" placeholder="Address"/>
+                        <lightning:input class="slds-size_1-of-2 slds-float_left slds-p-around_x-small" aura:id="field" 
+                                         type="text" 
+                                         label="Blood Group" 
+                                         value="{!v.simpleRecord.Blood_Group__c}" 
+                                         placeholder="Blood Group" 
+                                         maxlength="3" 
+                                         pattern="(A|B|AB|O)[-+]"
+                                         messageWhenValueMissing="Invalid Input (Ex AB-, AB+ , O+ etc)"/>
+                        <!--lightning:select name="select" 
+                                          label="Status" 
+                                          required="false" 
+                                          messageWhenValueMissing="Did you forget to select status" 
+                                          value="{!v.simpleRecord.Status__c}" 
+                                          class="slds-size_1-of-2 slds-float_left slds-p-around_x-small">
+                            <aura:iteration items="{!v.optionValue}" var="value">
+                                <option value="{!value}" text="{!value}"></option>
+                            </aura:iteration>
+                        </lightning:select-->
+                    </aura:if>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button label="Cancel" onclick="{!c.cancel}"  />
+                <lightning:button label="Save" onclick="{!c.saveContact}" variant="brand"/>
+            </footer>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

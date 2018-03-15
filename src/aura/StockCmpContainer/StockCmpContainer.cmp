@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable">
+	<c:StockUserInputCmp />
+    <c:StockUpdatesDetailCmp />
+</aura:component>

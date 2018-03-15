@@ -1,0 +1,9 @@
+<aura:component >
+    
+    <aura:attribute name="message" type="String"/>
+	
+    <ui:button label="Show Error" press="{!c.showError}"/>
+    <br/>
+	Error Message :<ui:outputText value="{!v.message}"/>
+	
+</aura:component>

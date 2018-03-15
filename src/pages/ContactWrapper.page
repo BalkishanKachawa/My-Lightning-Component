@@ -1,0 +1,5 @@
+<apex:page controller="contactWrapperDemo">
+<apex:repeat value="{!conWList}" var="con">
+    {!con.FirstName},{!con.Account.Name}
+</apex:repeat>
+</apex:page>

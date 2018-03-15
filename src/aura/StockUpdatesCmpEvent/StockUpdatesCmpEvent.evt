@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Component Event for Chart Summary" >
+	<aura:attribute name="symbolTicker" type="String"/>
+</aura:event>

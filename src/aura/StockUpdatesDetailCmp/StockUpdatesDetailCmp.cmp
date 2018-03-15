@@ -1,0 +1,50 @@
+<aura:component controller="StockUpdatesController">
+    <!--Require files-->
+    <ltng:require scripts="/resource/stockfiles/stockfiles/jquerymin.js,
+							/resource/stockfiles/stockfiles/highcharts.js,
+							/resource/stockfiles/stockfiles/jquery.highchartTable.js"></ltng:require>
+    
+    <aura:handler event="c:StockUpdatesAppEvent" action="{!c.getStockDetail}"/>
+    
+    <aura:attribute name="stockDetail" type="StockUpdatesWrapperClass" />
+    <!--Strock Data-->
+    <div>
+        <aura:if isTrue="{!v.stockDetail !=null}">
+            <div class="stockInfo">
+                <div class="companyTitle"><a href='#'>
+                    <ui:outputText value="{!v.stockDetail.Name +'(Symbol:' +v.stockDetail.Symbol+ ')'}" /> </a></div>
+                <div class="companySymbolDateTime"> <ui:outputText value="{!v.stockDetail.LastTradeDate + ' - ' + v.stockDetail.LastTradeTime}"/>  ET</div>
+                <span class="companyStockPrice"> <ui:outputText value="{!v.stockDetail.LastTradePriceOnly}"/> </span>
+                <aura:if isTrue="{!v.stockDetail.stockChangeDirection=='Up'}">
+                    <span class="companyStockUp"> <ui:outputText value="{!v.stockDetail.stockChange + '(' + v.stockDetail.stockChangePercent + ')'}"/></span>
+                    <aura:set attribute="else">
+                        <span class="companyStockDown"> <ui:outputText value="{!v.stockDetail.stockChange + '(' + v.stockDetail.stockChangePercent + ')'}"/></span>
+                    </aura:set>
+                </aura:if>                 
+                
+                <div class="mdetails">
+                    <div class="companyStockLabels">
+                        <div>Days High</div>
+                        <div>Days Low</div>
+                        <div>52 Week High</div>
+                        <div>52 Week Low</div>
+                        <div>Market Capitalization</div>
+                    </div>
+                    <div class="companyStockValues">
+                        <div> <ui:outputText value="{!v.stockDetail.DaysHigh}"/> </div>
+                        <div> <ui:outputText value="{!v.stockDetail.DaysLow}"/> </div>
+                        <div> <ui:outputText value="{!v.stockDetail.YearHigh}"/> </div>
+                        <div> <ui:outputText value="{!v.stockDetail.YearLow}"/> </div>
+                        <div> <ui:outputText value="{!v.stockDetail.MarketCapitalization}"/> </div>
+                    </div>
+                </div>
+            </div>
+            <!--Strock Chart-->
+            <c:StockUpdatesChartCmp TickerSymbol="{!v.stockDetail.Symbol}" regCmpEvent="{!c.handleSetSymbolCmpEvent}"/>
+            <aura:set attribute="else">
+                <!--Custom Message -->
+                <div style="display:none;color:red;">No Records Found</div>
+            </aura:set>
+        </aura:if> 
+    </div>
+</aura:component>

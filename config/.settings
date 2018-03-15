@@ -1,0 +1,18 @@
+{
+    "projectName": "My Lightning Component",
+    "username": "clouddomain@cloudforce.com",
+    "id": "b4017050-2809-11e8-9754-6d4df660e034",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://stockdomain-dev-ed.my.salesforce.com",
+    "workspace": "/Users/bkachawaa/Documents",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "AuraDefinitionBundle",
+        "StaticResource"
+    ]
+}

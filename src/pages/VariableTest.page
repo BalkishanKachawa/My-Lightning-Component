@@ -1,0 +1,7 @@
+<apex:page controller="ContactController">
+  <apex:variable var="indx" value="{!colorcode}"/>
+  <p>Greetings, {!indx}</p>
+  <apex:variable var="indx" value="{!indx+'15'}"/>
+  <p>Greetings, {!indx}</p>
+  <div style="width:100px;height:100px;background-color:{!indx};"/>
+</apex:page>

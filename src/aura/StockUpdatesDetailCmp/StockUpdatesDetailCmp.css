@@ -1,0 +1,86 @@
+.THIS .companyTitle {
+    color: #878787;
+    font-weight: lighter;
+    line-height: 1.2;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.THIS .companySymbolDateTime {
+    color: #878787;
+    font-size: medium;
+    font-weight: lighter;
+    line-height: 1.2;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.THIS .companyStockPrice {
+    color: #212121;
+    font-size: xx-large;
+    font-weight: lighter;
+    line-height: 1.1;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.THIS .companyStockUp {
+    color: #3d9400;
+    font-size: x-large;
+    font-weight: lighter;
+    line-height: 1.1;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.THIS .companyStockDown {
+    color: #dd4b39;
+    font-size: x-large;
+    font-weight: lighter;
+    line-height: 1.1;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.THIS .companyStockLabels {
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: #404040;
+    float: left;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.4em;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    padding-right:10px;
+    
+}
+
+.THIS .companyStockValues {
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: #404040;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.4em;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;   
+    
+}
+
+.THIS .hidden {
+    display: none;
+}

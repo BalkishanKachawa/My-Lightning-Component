@@ -1,0 +1,104 @@
+<apex:page showHeader="false" standardStylesheets="false">
+<html>
+<head>
+  <script src="https://cdn.pubnub.com/pubnub.min.js"></script>
+  <script src="https://cdn.pubnub.com/pubnub-crypto.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://pubnub.github.io/angular-js/scripts/pubnub-angular.js"></script>
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container" ng-app="PubNubAngularApp" ng-controller="ChatCtrl">
+
+<h4>Online Users</h4>
+<ul>
+  <li ng-repeat="user in users">{{user}}</li>
+</ul>
+
+<br />
+
+<h4>Chat History ({{messages.length}})</h4>
+
+<form ng-submit='publish()'>
+  <input type="text" ng-model='newMessage' />
+  <input type="submit" value="Send" />
+</form>
+
+<br />
+
+<div class="well">
+<ul>
+<li ng-repeat="message in messages">{{message}}</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+//
+// Set Up Your Angular Module & Controller(s)
+//
+angular.module('PubNubAngularApp', ["pubnub.angular.service"])
+.controller('ChatCtrl', function($rootScope, $scope, $location, PubNub) {
+  // make up a user id (you probably already have this)
+  var a="{!$User.FirstName}  {!$User.LastName} ";
+  $scope.userId   = a;
+  // make up a channel name
+  $scope.channel  = 'Force WhatsApp';
+  // pre-populate any existing messages (just an AngularJS scope object)
+  $scope.messages = ['Welcome to ' + $scope.channel];
+
+  if (!$rootScope.initialized) {
+    // Initialize the PubNub service
+    PubNub.init({
+      subscribe_key: 'sub-c-93d48b20-c4f9-11e5-a316-0619f8945a4f',
+      publish_key: 'pub-c-21e66f61-9068-4b53-870a-ceac1dca3dd7',
+      uuid:$scope.userId,
+       ssl: true
+    });
+    $rootScope.initialized = true;
+  }
+
+  // Subscribe to the Channel
+  PubNub.ngSubscribe({ channel: $scope.channel });
+
+
+  // Create a publish() function in the scope
+  $scope.publish = function() {
+    PubNub.ngPublish({
+      channel: $scope.channel,
+      message: "[" + $scope.userId + "] " + $scope.newMessage
+    });
+    $scope.newMessage = '';
+  };
+
+  // Register for message events
+  $rootScope.$on(PubNub.ngMsgEv($scope.channel), function(ngEvent, payload) {
+    $scope.$apply(function() {
+      $scope.messages.push(payload.message);
+    });
+  });
+
+$rootScope.$on(PubNub.ngPrsEv($scope.channel), function(ngEvent, payload) {
+    $scope.$apply(function() {
+        $scope.users = PubNub.ngListPresence($scope.channel);
+    });
+});
+
+
+  // Pre-Populate the user list (optional)
+  PubNub.ngHereNow({
+    channel: $scope.channel
+  });
+  
+  // Populate message history (optional)
+  PubNub.ngHistory({
+    channel: $scope.channel,
+    count: 500
+  });
+});
+</script>
+</body>
+</html>
+</apex:page>
